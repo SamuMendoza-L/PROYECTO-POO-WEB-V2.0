@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+  <div class="card auth-card">
+    <h2>Iniciar sesión</h2>
+    <form method="post" action="{{ url_for('main.login') }}">
+      <label>Correo</label>
+      <input name="correo" type="email" required>
+      <label>Contraseña</label>
+      <input name="password" type="password" required>
+      <button type="submit">Ingresar</button>
+    </form>
+    <p>¿No tienes cuenta? <a href="{{ url_for('main.register') }}">Registrarme</a></p>
+  </div>
+{% endblock %}

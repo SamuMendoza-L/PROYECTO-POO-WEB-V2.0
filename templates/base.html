@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Mi App{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Mi Emprendimiento</h1>
+      {% if session.get('user_nombre') %}
+        <div class="user-info">Hola, {{ session.get('user_nombre') }} | <a href="{{ url_for('main.logout') }}">Cerrar sesión</a></div>
+      {% endif %}
+    </div>
+  </header>
+  <main class="main">
+    <div class="container">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class="flash-list">
+            {% for m in messages %}
+              <li>{{ m }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container">© 2025 - App Demo</div>
+  </footer>
+</body>
+</html>

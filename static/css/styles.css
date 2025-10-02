@@ -1,0 +1,116 @@
+/* Variables de color según tu paleta (ajusta con los que me diste en el archivo) */
+:root {
+  --primary: #1a73e8;    /* azul principal */
+  --secondary: #fbbc04;  /* amarillo/acento */
+  --success: #34a853;    /* verde */
+  --danger: #ea4335;     /* rojo */
+  --bg: #f4f6f9;         /* gris claro fondo */
+  --text: #333;
+  --white: #fff;
+}
+
+/* Layout dashboard */
+.dashboard {
+  display: flex;
+  min-height: 80vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: var(--primary);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.sidebar-title {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+.sidebar-menu li {
+  margin-bottom: 15px;
+}
+.sidebar-menu a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 8px;
+  border-radius: 6px;
+}
+.sidebar-menu a:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Tarjetas de estadísticas */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.stat-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.stat-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+.stat-card p {
+  font-size: 1.5rem;
+  margin-top: 8px;
+  font-weight: bold;
+}
+.stat-card.ingreso p { color: var(--success); }
+.stat-card.egreso p { color: var(--danger); }
+.stat-card.balance p { color: var(--primary); }
+
+/* Tabla pedidos */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+.table th, .table td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+.table th {
+  background: #eee;
+}
+.badge {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+.badge.success { background: var(--success); color: white; }
+.badge.pending { background: var(--secondary); color: black; }
+
+/* Botón */
+.btn {
+  display: inline-block;
+  padding: 8px 14px;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+.btn:hover {
+  background: #155ab6;
+}

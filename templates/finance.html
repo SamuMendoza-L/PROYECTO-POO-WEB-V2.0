@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Finanzas</h2>
+  <div class="fin-grid">
+    <div class="card">
+      <h3>Registrar Ingreso/Egreso</h3>
+      <form method="post">
+        <label>Tipo</label>
+        <select name="tipo"><option value="ingreso">Ingreso</option><option value="egreso">Egreso</option></select>
+        <label>Fecha</label><input name="fecha" type="date" required>
+        <label>Monto</label><input name="monto" type="number" step="0.01" required>
+        <label>Descripción</label><input name="descripcion">
+        <button type="submit">Registrar</button>
+      </form>
+    </div>
+    <div class="card">
+      <h3>Resumen</h3>
+      <p>INGRESOS</p>
+      <ul>
+        {% for i in ingresos %}
+          <li>{{ i.fecha }} - ${{ "%.2f"|format(i.monto) }} - {{ i.descripcion }}</li>
+        {% endfor %}
+      </ul>
+      <p>EGRESOS</p>
+      <ul>
+        {% for e in egresos %}
+          <li>{{ e.fecha }} - ${{ "%.2f"|format(e.monto) }} - {{ e.descripcion }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

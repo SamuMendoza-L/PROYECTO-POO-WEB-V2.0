@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Pedidos</h2>
+  <div class="list">
+    {% for o in pedidos %}
+      <div class="order-card">
+        <h4>Pedido #{{ o.id }} - {{ o.cliente_nombre }}</h4>
+        <p>Fecha: {{ o.fecha.strftime('%Y-%m-%d %H:%M') }}</p>
+        <p>Total: ${{ "%.2f"|format(o.total) }}</p>
+        <p>Lugar retiro: {{ o.lugar_retiro }}</p>
+        <p>Comentarios: {{ o.comentarios }}</p>
+        <p>Método: {{ o.metodo_pago }} - Contacto: {{ o.cliente_contacto }}</p>
+        {% if not o.entregado %}
+          <form method="post" action="{{ url_for('main.entregar_pedido', order_id=o.id) }}">
+            <button type="submit">Marcar como entregado</button>
+          </form>
+        {% else %}
+          <span class="badge">Entregado</span>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

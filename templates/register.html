@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Registro{% endblock %}
+{% block content %}
+  <div class="card auth-card">
+    <h2>Registro</h2>
+    <!-- Primer paso: elegir rol -->
+    <form method="post" action="{{ url_for('main.register') }}">
+      <label>Tipo de registro</label>
+      <select name="role" required onchange="onRoleChange(this.value)">
+        <option value="">--Selecciona--</option>
+        <option value="emprendedor">Emprendedor</option>
+        <option value="cliente">Cliente</option>
+      </select>
+
+      <label>Nombre</label><input name="nombre" required>
+      <label>Apellido</label><input name="apellido" required>
+      <label>Carrera</label><input name="carrera">
+      <label>Correo</label><input name="correo" type="email" required>
+      <label>Teléfono</label><input name="telefono" required>
+      <label>Contraseña</label><input name="password" type="password" required>
+
+      <!-- campos solo emprendedor -->
+      <div id="emprendedor-fields" style="display:none;">
+        <label>Nombre emprendimiento</label>
+        <input name="nombre_emprendimiento">
+      </div>
+
+      <button type="submit">Registrar</button>
+    </form>
+  </div>
+
+  <script>
+    function onRoleChange(value) {
+      document.getElementById('emprendedor-fields').style.display = (value === 'emprendedor') ? 'block' : 'none';
+    }
+  </script>
+{% endblock %}

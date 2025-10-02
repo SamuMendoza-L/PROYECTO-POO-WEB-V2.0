@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard Emprendedor{% endblock %}
+{% block content %}
+<div class="dashboard">
+  
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="sidebar-title">{{ user.nombre_emprendimiento or "Mi Emprendimiento" }}</h2>
+    <ul class="sidebar-menu">
+      <li><a href="{{ url_for('main.dashboard_emprendedor') }}">🏠 Dashboard</a></li>
+      <li><a href="{{ url_for('main.productos') }}">📦 Productos</a></li>
+      <li><a href="{{ url_for('main.pedidos') }}">📝 Pedidos</a></li>
+      <li><a href="{{ url_for('main.finanzas') }}">💰 Finanzas</a></li>
+      <li><a href="{{ url_for('main.logout') }}">🚪 Cerrar sesión</a></li>
+    </ul>
+  </aside>
+
+  <!-- Contenido principal -->
+  <section class="main-content">
+    <h1>Bienvenido, {{ user.nombre }} 👋</h1>
+
+    <!-- Resumen en tarjetas -->
+    <div class="cards-grid">
+      <div class="card stat-card">
+        <h3>Total Productos</h3>
+        <p>{{ productos|length }}</p>
+      </div>
+      <div class="card stat-card">
+        <h3>Pedidos</h3>
+        <p>{{ pedidos|length }}</p>
+      </div>
+      <div class="card stat-card ingreso">
+        <h3>Ingresos</h3>
+        <p>${{ "%.2f"|format(ingresos) }}</p>
+      </div>
+      <div class="card stat-card egreso">
+        <h3>Egresos</h3>
+        <p>${{ "%.2f"|format(egresos) }}</p>
+      </div>
+      <div class="card stat-card balance">
+        <h3>Balance</h3>
+        <p>${{ "%.2f"|format(balance) }}</p>
+      </div>
+    </div>
+
+    <!-- Últimos pedidos -->
+    <div class="card">
+      <h2>Últimos pedidos</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Método</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for o in pedidos[:5] %}
+          <tr>
+            <td>{{ o.cliente_nombre }}</td>
+            <td>{{ o.fecha.strftime('%Y-%m-%d') }}</td>
+            <td>${{ "%.2f"|format(o.total) }}</td>
+            <td>{{ o.metodo_pago }}</td>
+            <td>
+              {% if o.entregado %}
+                <span class="badge success">Entregado</span>
+              {% else %}
+                <span class="badge pending">Pendiente</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <a class="btn" href="{{ url_for('main.pedidos') }}">Ver todos los pedidos</a>
+    </div>
+  </section>
+</div>
+{% endblock %}
